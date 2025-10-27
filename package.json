@@ -1,0 +1,12 @@
+{
+  "name": "auth-in",
+  "version": "1.0.0",
+  "description": "A fully functional user login page",
+  "license": "MIT",
+  "author": "Baraa",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
