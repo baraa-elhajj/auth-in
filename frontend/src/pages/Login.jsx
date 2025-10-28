@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-function Login() {
+const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const togglePassword = () => {
     setPasswordVisible(!passwordVisible);
@@ -97,6 +97,6 @@ function Login() {
       </p>
     </div>
   );
-}
+};
 
 export default Login;
