@@ -8,7 +8,6 @@ function Login() {
     setPasswordVisible(!passwordVisible);
   };
 
-  // @ts-ignore
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted!");
@@ -31,7 +30,7 @@ function Login() {
           <div className="grid gap-4">
             <div className="grid gap-2">
               <label
-                className="text-sm font-medium leading-none"
+                className="text-sm text-black/70 font-medium leading-none"
                 htmlFor="email"
               >
                 Email
@@ -48,7 +47,7 @@ function Login() {
             <div className="grid gap-2">
               <div className="flex items-center">
                 <label
-                  className="text-sm font-medium leading-none"
+                  className="text-sm text-black/70 font-medium leading-none"
                   htmlFor="password"
                 >
                   Password
@@ -63,7 +62,7 @@ function Login() {
                   type={passwordVisible ? "text" : "password"}
                 />
                 <div
-                  className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 mb-5"
+                  className="text-black/80 cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 mb-5"
                   onClick={togglePassword}
                 >
                   {passwordVisible ? <FaEye /> : <FaEyeSlash />}
@@ -87,7 +86,7 @@ function Login() {
         </form>
       </div>
 
-      <p className="px-8 text-center text-sm text-muted-foreground">
+      <p className="px-8 text-center text-sm text-gray-500">
         Don&apos;t have an account?{" "}
         <Link
           className="text-sm underline underline-offset-3 font-semibold text-violet-600/80 hover:text-violet-600/90"
