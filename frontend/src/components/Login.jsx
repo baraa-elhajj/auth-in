@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -67,13 +68,12 @@ function Login() {
                 >
                   {passwordVisible ? <FaEye /> : <FaEyeSlash />}
                 </div>
-                <a
-                  href="#"
-                  className="underline-offset-3 text-sm underline font-semibold 
-                  text-violet-600/80 hover:text-violet-600/90 mt-1"
+                <Link
+                  className="text-sm underline underline-offset-3 font-semibold text-violet-600/80 hover:text-violet-600/90"
+                  to="/forgot-password"
                 >
                   Forgot your password?
-                </a>
+                </Link>
               </div>
             </div>
             <button
@@ -89,12 +89,12 @@ function Login() {
 
       <p className="px-8 text-center text-sm text-muted-foreground">
         Don&apos;t have an account?{" "}
-        <a
-          href="#"
-          className="underline underline-offset-3 font-semibold text-violet-600/80 hover:text-violet-600/90"
+        <Link
+          className="text-sm underline underline-offset-3 font-semibold text-violet-600/80 hover:text-violet-600/90"
+          to="/signup"
         >
-          Sign up
-        </a>
+          Sign Up
+        </Link>
       </p>
     </div>
   );
