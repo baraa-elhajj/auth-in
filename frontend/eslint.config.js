@@ -1,4 +1,4 @@
-import js from "@eslint/js";
+import jsx from "@eslint/jsx";
 import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
@@ -9,7 +9,7 @@ export default defineConfig([
   {
     files: ["**/*.{js,jsx}"],
     extends: [
-      js.configs.recommended,
+      jsx.configs.recommended,
       reactHooks.configs["recommended-latest"],
       reactRefresh.configs.vite,
     ],
@@ -23,7 +23,7 @@ export default defineConfig([
       },
     },
     rules: {
-      "no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]|[a-z_]" }],
+      "no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]" }],
     },
   },
 ]);
