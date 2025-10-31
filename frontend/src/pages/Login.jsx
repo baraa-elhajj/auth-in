@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [loginForm, setLoginForm] = useState(true);
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const togglePassword = () => {
     setPasswordVisible(!passwordVisible);
@@ -50,9 +55,11 @@ const Login = () => {
                   className="flex h-10 w-full rounded-md border border-gray-200 bg-background px-3 py-2 text-sm  
                 placeholder:text-gray-500 shadow-xs disabled:cursor-not-allowed disabled:opacity-50"
                   id="name"
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
                   placeholder="your name"
-                  required
                   type="text"
+                  required
                 />
               </div>
             )}
@@ -64,6 +71,8 @@ const Login = () => {
                 Email
               </label>
               <input
+                onChange={(e) => EmailName(e.target.value)}
+                value={email}
                 className="flex h-10 w-full rounded-md border border-gray-200 bg-background px-3 py-2 text-sm  
                 placeholder:text-gray-500 shadow-xs disabled:cursor-not-allowed disabled:opacity-50"
                 id="email"
@@ -83,6 +92,8 @@ const Login = () => {
               </div>
               <div className="relative">
                 <input
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
                   className="flex h-10 w-full rounded-md border border-gray-200 bg-background px-3 py-2 
                   text-sm placeholder:text-gray-500 shadow-xs disabled:cursor-not-allowed disabled:opacity-50"
                   id="password"
@@ -96,12 +107,12 @@ const Login = () => {
                   {passwordVisible ? <FaEye /> : <FaEyeSlash />}
                 </div>
                 {loginForm && (
-                  <Link
-                    className="text-xs underline underline-offset-3 font-semibold text-violet-600/80 hover:text-violet-600/90"
-                    to="/reset-password"
+                  <div
+                    className="cursor-pointer text-xs underline underline-offset-3 font-semibold text-violet-600/80 hover:text-violet-600/90"
+                    onClick={() => navigate("/reset-password")}
                   >
                     Forgot your password?
-                  </Link>
+                  </div>
                 )}
               </div>
             </div>
