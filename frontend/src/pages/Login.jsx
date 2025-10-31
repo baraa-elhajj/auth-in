@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { AppContent } from "@/contexts/AppContext";
+import axios from "axios";
+import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [loginForm, setLoginForm] = useState(true);
@@ -10,6 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+  const { apiUrl, setIsLoggedIn } = useContext(AppContent);
 
   const togglePassword = () => {
     setPasswordVisible(!passwordVisible);
@@ -19,9 +23,41 @@ const Login = () => {
     setLoginForm(!loginForm);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted!");
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      axios.defaults.withCredentials = true;
+      if (loginForm) {
+        // Login
+        const { data } = await axios.post(apiUrl + "/auth/login", {
+          email,
+          password,
+        });
+
+        if (data.success) {
+          setIsLoggedIn(true);
+          navigate("/");
+        } else {
+          toast.error(data.message);
+        }
+      } else {
+        // Sign Up
+        const { data } = await axios.post(apiUrl + "/auth/register", {
+          name,
+          email,
+          password,
+        });
+
+        if (data.success) {
+          setIsLoggedIn(true);
+          navigate("/");
+        } else {
+          toast.error(data.message);
+        }
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -71,7 +107,7 @@ const Login = () => {
                 Email
               </label>
               <input
-                onChange={(e) => EmailName(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 className="flex h-10 w-full rounded-md border border-gray-200 bg-background px-3 py-2 text-sm  
                 placeholder:text-gray-500 shadow-xs disabled:cursor-not-allowed disabled:opacity-50"
