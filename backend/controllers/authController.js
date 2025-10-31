@@ -1,9 +1,8 @@
 import asyncHandler from "express-async-handler";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import User from "../models/user";
-import constants from "../constants";
-import generateToken from "../utils/generateToken";
+import userModel from "../models/userModel.js";
+import constants from "../constants.js";
+import generateToken from "../utils/generateToken.js";
 
 // @ts-ignore
 export const register = asyncHandler(async (req, res) => {
@@ -14,14 +13,18 @@ export const register = asyncHandler(async (req, res) => {
     throw new Error("All fields are mandatory");
   }
 
-  const userExists = await User.findOne({ email });
+  const userExists = await userModel.findOne({ email });
   if (userExists) {
     res.status(constants.VALIDATION_ERROR);
     throw new Error("User already exists");
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = await User.create({ name, email, password: hashedPassword });
+  const newUser = await userModel.create({
+    name,
+    email,
+    password: hashedPassword,
+  });
   if (newUser) {
     res.status(constants.CREATED).json({
       message: "Registration successful",
@@ -46,7 +49,7 @@ export const login = asyncHandler(async (req, res) => {
     throw new Error("All fields are mandatory");
   }
 
-  const user = await User.findOne({ email });
+  const user = await userModel.findOne({ email });
   if (!user || !(await bcrypt.compare(password, user.password))) {
     res.status(constants.UNAUTHORIZED);
     throw new Error("Invalid email or password");
