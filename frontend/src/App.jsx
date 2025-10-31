@@ -8,10 +8,8 @@ import {
 } from "react-router-dom";
 
 import ProtectedRoute from "./components/ProtectedRoute";
-
 import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
-import ForgotPassword from "./pages/ForgotPassword";
+import ForgotPassword from "./pages/ResetPassword";
 import Home from "./pages/Home";
 import RootLayout from "./layout/RootLayout";
 
@@ -22,8 +20,7 @@ export default function App() {
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
         <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/reset-password" element={<ForgotPassword />} />
         <Route
           path="/home"
           element={
