@@ -10,7 +10,7 @@ const ForgotPassword = () => {
      bg-white text-black/80 rounded-xl border border-gray-200 shadow-sm"
     >
       <div className="flex flex-col space-y-2 text-center">
-        <h1 className="text-2xl font-semibold">Forgot Password</h1>
+        <h1 className="text-2xl font-semibold">Reset Password</h1>
         <p className="text-sm text-gray-500">
           Enter your email to get a verification code
         </p>
