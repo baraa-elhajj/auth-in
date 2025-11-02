@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import connectDB from "./config/mongoDB.js";
 import authRouter from "./routes/authRoutes.js";
 import errorHandler from "./middlewares/errorHandler.js";
+import userRouter from "./routes/userRoutes.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -18,6 +19,7 @@ app.use(cors({ origin: allowedOrigins, credentials: true }));
 
 app.get("/", (req, res) => res.send("API is working"));
 app.use("/api/auth", authRouter);
+app.use("/api/users", userRouter);
 
 app.use(errorHandler);
 
