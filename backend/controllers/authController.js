@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import userModel from "../models/userModel.js";
 import constants from "../constants.js";
 import generateToken from "../utils/generateToken.js";
+import transporter from "../config/nodemailer.js";
 
 // @ts-ignore
 export const register = asyncHandler(async (req, res) => {
@@ -25,7 +26,22 @@ export const register = asyncHandler(async (req, res) => {
     email,
     password: hashedPassword,
   });
+
   if (newUser) {
+    const mailOptions = {
+      from: `"BDev" <${process.env.SMTP_BREVO_EMAIL}>`,
+      to: email,
+      subject: "Welcome to AuthIn",
+      text: `Hello ${name}, thanks for trying out AuthIn, your account has been created successfully!`,
+    };
+
+    try {
+      await transporter.sendMail(mailOptions);
+    } catch (error) {
+      // @ts-ignore
+      console.error("Could not send welcome email: ", error.message);
+    }
+
     res.status(constants.CREATED).json({
       message: "Registration successful",
       user: {
