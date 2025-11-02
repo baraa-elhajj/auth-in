@@ -15,7 +15,7 @@ const authTokenHandler = (req, res, next) => {
       throw new Error("Invalid token");
     }
 
-    req.body.user = decodedToken.user;
+    req.id = decodedToken.id;
     next();
   });
 };
