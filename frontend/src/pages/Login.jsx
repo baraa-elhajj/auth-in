@@ -1,3 +1,4 @@
+import Spinner from "@/components/Spinner";
 import { AppContent } from "@/contexts/AppContext";
 import axios from "axios";
 import { useContext, useState } from "react";
@@ -7,6 +8,7 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const [loginForm, setLoginForm] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -21,42 +23,48 @@ const Login = () => {
 
   const toggleLoginForm = () => {
     setLoginForm(!loginForm);
+    setName("");
+    setEmail("");
+    setPassword("");
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     try {
       e.preventDefault();
+
       axios.defaults.withCredentials = true;
       if (loginForm) {
         // Login
-        const { data } = await axios.post(apiUrl + "/auth/login", {
-          email,
-          password,
-        });
-
-        if (data.success) {
-          setIsLoggedIn(true);
-          navigate("/");
-        } else {
-          toast.error(data.message);
-        }
+        await axios
+          .post(apiUrl + "/auth/login", { email, password })
+          .then((response) => {
+            console.log(response);
+            setIsLoggedIn(true);
+            navigate("/");
+          })
+          .catch((error) => {
+            toast.error(error.response.data.message);
+          });
       } else {
         // Sign Up
-        const { data } = await axios.post(apiUrl + "/auth/register", {
-          name,
-          email,
-          password,
-        });
-
-        if (data.success) {
-          setIsLoggedIn(true);
-          navigate("/");
-        } else {
-          toast.error(data.message);
-        }
+        await axios
+          .post(apiUrl + "/auth/register", { name, email, password })
+          .then((response) => {
+            setLoginForm(true);
+            setEmail(response.data.user.email);
+            toast.success(
+              "Account created successfully! Please login with your email."
+            );
+          })
+          .catch((error) => {
+            toast.error(error.response.data.message);
+          });
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error("Something went wrong. Try again later!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -137,7 +145,9 @@ const Login = () => {
                   type={passwordVisible ? "text" : "password"}
                 />
                 <div
-                  className="text-black/80 cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 mb-5"
+                  className={`text-black/80 cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 ${
+                    loginForm && "mb-3"
+                  }`}
                   onClick={togglePassword}
                 >
                   {passwordVisible ? <FaEye /> : <FaEyeSlash />}
@@ -153,11 +163,14 @@ const Login = () => {
               </div>
             </div>
             <button
-              className="cursor-pointer items-center justify-center rounded-md text-sm font-medium 
+              disabled={loading}
+              className={`items-center justify-center rounded-md text-sm font-medium 
              transition-colors duration-300 text-white/90 bg-violet-600/80 hover:bg-violet-600/85 
-             h-10 px-4 py-2 w-full"
+             h-10 px-4 py-2 w-full ${
+               loading ? "cursor-not-allowed opacity-80" : "cursor-pointer"
+             }`}
             >
-              {loginForm ? "Sign In" : "Sign Up"}
+              {loading ? <Spinner /> : loginForm ? "Sign In" : "Sign Up"}
             </button>
           </div>
         </form>
