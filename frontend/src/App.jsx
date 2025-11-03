@@ -7,7 +7,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ResetPassword";
 import Home from "./pages/Home";
@@ -19,17 +18,9 @@ export default function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
+        <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reset-password" element={<ForgotPassword />} />
-        <Route
-          path="/home"
-          element={
-            <ProtectedRoute
-              element={<Home />}
-              isAuthenticated={isAuthenticated}
-            />
-          }
-        />
       </Route>
     )
   );
