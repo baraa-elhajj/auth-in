@@ -1,7 +1,8 @@
+import PageLoader from "@/components/PageLoader";
 import Spinner from "@/components/Spinner";
 import { AppContent } from "@/contexts/AppContext";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -16,7 +17,14 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-  const { apiUrl, setIsLoggedIn, setUserData } = useContext(AppContent);
+  const { apiUrl, isLoggedIn, setIsLoggedIn, setUserData, authLoading } =
+    useContext(AppContent);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn]);
 
   const togglePassword = () => {
     setPasswordVisible(!passwordVisible);
@@ -71,6 +79,10 @@ const Login = () => {
       setLoading(false);
     }
   };
+
+  if (authLoading) {
+    return <PageLoader />;
+  }
 
   return (
     <div

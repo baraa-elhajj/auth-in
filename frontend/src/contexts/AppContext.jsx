@@ -7,6 +7,7 @@ export const AppContextProvider = (props) => {
   const apiUrl = import.meta.env.VITE_API_URL;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -22,6 +23,9 @@ export const AppContextProvider = (props) => {
         .catch(() => {
           setIsLoggedIn(false);
           setUserData(null);
+        })
+        .finally(() => {
+          setAuthLoading(false);
         });
     };
 
@@ -34,6 +38,7 @@ export const AppContextProvider = (props) => {
     setIsLoggedIn,
     userData,
     setUserData,
+    authLoading,
   };
 
   return (
