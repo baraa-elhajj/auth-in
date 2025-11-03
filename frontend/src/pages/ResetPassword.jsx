@@ -34,6 +34,9 @@ const ForgotPassword = () => {
             >
               Get verification code
             </button>
+            <p className="text-xs text-center text-gray-500">
+              Verification codes expire in 15 mins
+            </p>
           </div>
         </form>
       </div>
