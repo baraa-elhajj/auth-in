@@ -13,8 +13,6 @@ import Home from "./pages/Home";
 import RootLayout from "./layout/RootLayout";
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
