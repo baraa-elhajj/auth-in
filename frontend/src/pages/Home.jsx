@@ -11,7 +11,7 @@ const Home = () => {
     <div className="flex flex-col items-center gap-2">
       <img className="w-40 h-40" src={developer} />
       <h1 className="mt-5 text-xl font-semibold">
-        Hello, {userData?.name ?? "Developer"}!
+        Hello, {isLoggedIn ? userData?.name : "Developer"}!
       </h1>
       <h1 className="text-3xl">Welcome to AuthIn</h1>
       <p className="text-lg w-md text-center">

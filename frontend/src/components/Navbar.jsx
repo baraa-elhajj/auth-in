@@ -21,7 +21,6 @@ const Navbar = () => {
       .then((response) => {
         setIsLoggedIn(false);
         setUserData(null);
-        console.log(response);
         toast.success(response.data.message ?? "Logged out successfully");
       })
       .catch((error) => {
