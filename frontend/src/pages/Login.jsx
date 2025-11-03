@@ -7,15 +7,16 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const [loginForm, setLoginForm] = useState(true);
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const [loginForm, setLoginForm] = useState(true);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-  const { apiUrl, setIsLoggedIn } = useContext(AppContent);
+  const { apiUrl, setIsLoggedIn, setUserData } = useContext(AppContent);
 
   const togglePassword = () => {
     setPasswordVisible(!passwordVisible);
@@ -41,7 +42,9 @@ const Login = () => {
           .then((response) => {
             console.log(response);
             setIsLoggedIn(true);
+            setUserData(response.data.user);
             navigate("/");
+            toast.success(response.data.message ?? "Logged in successfully");
           })
           .catch((error) => {
             toast.error(error.response.data.message);
@@ -54,7 +57,8 @@ const Login = () => {
             setLoginForm(true);
             setEmail(response.data.user.email);
             toast.success(
-              "Account created successfully! Please login with your email."
+              response.data.message ??
+                "Account created successfully! Please login with your email."
             );
           })
           .catch((error) => {
@@ -154,7 +158,8 @@ const Login = () => {
                 </div>
                 {loginForm && (
                   <div
-                    className="cursor-pointer text-xs underline underline-offset-3 font-semibold text-violet-600/80 hover:text-violet-600/90"
+                    className="cursor-pointer text-xs underline underline-offset-3 font-semibold 
+                    text-violet-600/80 hover:text-violet-600/90 mt-1"
                     onClick={() => navigate("/reset-password")}
                   >
                     Forgot your password?
@@ -164,13 +169,19 @@ const Login = () => {
             </div>
             <button
               disabled={loading}
-              className={`items-center justify-center rounded-md text-sm font-medium 
+              className={`items-center justify-center rounded-md text-sm font-semibold 
              transition-colors duration-300 text-white/90 bg-violet-600/80 hover:bg-violet-600/85 
              h-10 px-4 py-2 w-full ${
                loading ? "cursor-not-allowed opacity-80" : "cursor-pointer"
              }`}
             >
-              {loading ? <Spinner /> : loginForm ? "Sign In" : "Sign Up"}
+              {loading ? (
+                <Spinner color="white" />
+              ) : loginForm ? (
+                "Sign In"
+              ) : (
+                "Sign Up"
+              )}
             </button>
           </div>
         </form>
