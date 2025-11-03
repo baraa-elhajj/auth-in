@@ -164,3 +164,15 @@ export const resetPassword = asyncHandler(async (req, res) => {
 
   res.status(constants.OK).json({ message: "Password reset successfully" });
 });
+
+export const getCurrentUser = asyncHandler(async (req, res) => {
+  // @ts-ignore
+  const user = await userModel.findById(req.id);
+
+  const userResponse = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+  };
+  res.status(constants.OK).json(userResponse);
+});
