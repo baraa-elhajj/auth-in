@@ -1,13 +1,17 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import Spinner from "./Spinner";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { AppContent } from "@/contexts/AppContext";
 
-const VerificationCode = ({ setVerifyCode }) => {
+const VerificationCode = ({ setVerifyCode, setResetPassword, email }) => {
   const [loading, setLoading] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(0);
   const inputRefs = useRef([]);
   const [code, setCode] = useState(new Array(6).fill(""));
   const isCodeComplete = code.every((digit) => digit !== "");
+
+  const { apiUrl } = useContext(AppContent);
 
   const handleChange = (element, index) => {
     if (isNaN(Number(element.value)) || element.value === " ") {
@@ -57,8 +61,24 @@ const VerificationCode = ({ setVerifyCode }) => {
   };
 
   const handleVerify = async () => {
-    setVerifyCode(false);
-    toast.success(`Code is ${code.join("")}`);
+    await axios
+      .put(apiUrl + "/auth/verify-code", {
+        email,
+        verificationCode: code.join(""),
+      })
+      .then(() => {
+        setVerifyCode(false);
+        setResetPassword(true);
+      })
+      .catch((error) => {
+        toast.error(
+          error.response.data.message ||
+            "Something went wrong. Please try again later"
+        );
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
