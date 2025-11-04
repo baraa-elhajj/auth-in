@@ -119,7 +119,7 @@ export const sendVerificationCode = asyncHandler(async (req, res) => {
     from: `"AuthIn" <${process.env.SMTP_BREVO_EMAIL}>`,
     to: email,
     subject: "Reset Password",
-    text: `Your verification code is ${otp}. Use it to reset your password.`,
+    text: `Hello ${user.name}, your verification code is ${otp}. Use it to reset your password.`,
   };
 
   try {
@@ -132,9 +132,9 @@ export const sendVerificationCode = asyncHandler(async (req, res) => {
   res.status(constants.OK).json({ message: "Verification code sent" });
 });
 
-export const resetPassword = asyncHandler(async (req, res) => {
-  const { email, verificationCode, newPassword } = req.body;
-  if (!email || !verificationCode || !newPassword) {
+export const verifyCode = asyncHandler(async (req, res) => {
+  const { email, verificationCode } = req.body;
+  if (!email || !verificationCode) {
     res.status(constants.VALIDATION_ERROR);
     throw new Error("All fields are required");
   }
@@ -155,11 +155,37 @@ export const resetPassword = asyncHandler(async (req, res) => {
     throw new Error("Expired verification code");
   }
 
+  user.resetOtp = "";
+  user.resetOtpExpireAt = 0;
+  user.passwordResetAllowed = true;
+
+  await user.save();
+
+  res.status(constants.OK).json({ message: "Verification success" });
+});
+
+export const resetPassword = asyncHandler(async (req, res) => {
+  const { email, newPassword } = req.body;
+  if (!email || !newPassword) {
+    res.status(constants.VALIDATION_ERROR);
+    throw new Error("All fields are required");
+  }
+
+  const user = await userModel.findOne({ email });
+  if (!user) {
+    res.status(constants.NOT_FOUND);
+    throw new Error("User not found");
+  }
+
+  if (!user.passwordResetAllowed) {
+    res.status(constants.VALIDATION_ERROR);
+    throw new Error("Action not allowed");
+  }
+
   const hashedPassword = await bcrypt.hash(newPassword, 10);
 
   user.password = hashedPassword;
-  user.resetOtp = "";
-  user.resetOtpExpireAt = 0;
+  user.passwordResetAllowed = false;
   await user.save();
 
   res.status(constants.OK).json({ message: "Password reset successfully" });
