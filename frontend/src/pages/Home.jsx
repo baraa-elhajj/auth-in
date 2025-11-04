@@ -20,13 +20,13 @@ const Home = () => {
       </h1>
 
       <h1 className="text-3xl">
-        {isLoggedIn ? "Congratulations" : "Welcome to AuthIn"}
+        {isLoggedIn ? "Congratulations" : "Welcome to Auth In"}
       </h1>
 
       <p className="text-lg w-md text-center">
         {isLoggedIn
-          ? "You have successfully logged in to AuthIn"
-          : "AuthIn is a simple and cool fully functional Login component. Get started below!"}
+          ? "You have successfully logged in to Auth In"
+          : "Auth In is a simple and cool fully functional Login component. Get started below!"}
       </p>
 
       {!isLoggedIn && (
