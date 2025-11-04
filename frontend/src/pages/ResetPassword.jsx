@@ -1,8 +1,47 @@
+import Spinner from "@/components/Spinner";
+import VerificationCode from "@/components/VerificationCode";
+import { AppContent } from "@/contexts/AppContext";
+import axios from "axios";
+import { useContext, useState } from "react";
+import { toast } from "react-toastify";
+
 const ForgotPassword = () => {
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [verifyCode, setVerifyCode] = useState(false);
+  const [resetPassword, setResetPassword] = useState(false);
+  const { apiUrl } = useContext(AppContent);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted!");
+
+    setLoading(true);
+    await axios
+      .post(apiUrl + "/auth/send-verification-code", { email })
+      .then((response) => {
+        setVerifyCode(true);
+        toast.success(response.data.message ?? "Code Sent");
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
+
+  if (verifyCode) {
+    return (
+      <VerificationCode
+        setVerifyCode={setVerifyCode}
+        setResetPassword={setResetPassword}
+      />
+    );
+  }
+
+  if (resetPassword) {
+    // TODO: reset password api call
+  }
 
   return (
     <div
@@ -23,16 +62,23 @@ const ForgotPassword = () => {
               className="flex h-10 w-full rounded-md border border-gray-200 bg-background px-3 py-2 text-sm  
                 placeholder:text-gray-500 shadow-xs disabled:cursor-not-allowed disabled:opacity-50"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="your email"
               required
               type="email"
             />
             <button
-              className="cursor-pointer items-center justify-center rounded-md text-sm font-medium 
-             transition-colors duration-300 text-white/90 bg-violet-600/80 hover:bg-violet-600/85 
-             h-10 px-4 py-2 w-full"
+              disabled={loading}
+              className={`items-center justify-center rounded-md text-sm font-semibold 
+              transition-colors duration-300 text-white/90 bg-violet-600/80 
+              h-10 px-4 py-2 w-full ${
+                loading
+                  ? "cursor-not-allowed opacity-70"
+                  : "cursor-pointer hover:bg-violet-600/70"
+              }`}
             >
-              Get verification code
+              {loading ? <Spinner color="white" /> : "Send Verification Code"}
             </button>
             <p className="text-xs text-center text-gray-500">
               Verification codes expire in 15 mins
