@@ -107,7 +107,7 @@ export const sendVerificationCode = asyncHandler(async (req, res) => {
   const user = await userModel.findOne({ email });
   if (!user) {
     res.status(constants.NOT_FOUND);
-    throw new Error("User not found");
+    throw new Error("Invalid email");
   }
 
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
@@ -116,7 +116,7 @@ export const sendVerificationCode = asyncHandler(async (req, res) => {
   await user.save();
 
   const mailOptions = {
-    from: `"BDev" <${process.env.SMTP_BREVO_EMAIL}>`,
+    from: `"AuthIn" <${process.env.SMTP_BREVO_EMAIL}>`,
     to: email,
     subject: "Reset Password",
     text: `Your verification code is ${otp}. Use it to reset your password.`,
