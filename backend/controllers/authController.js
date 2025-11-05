@@ -28,10 +28,10 @@ export const register = asyncHandler(async (req, res) => {
 
   if (newUser) {
     const mailOptions = {
-      from: `"AuthIn" <${process.env.SMTP_BREVO_EMAIL}>`,
+      from: `"Auth In" <${process.env.SMTP_BREVO_EMAIL}>`,
       to: email,
-      subject: "Welcome to AuthIn",
-      text: `Hello ${name}, thanks for trying out AuthIn, your account has been created successfully!`,
+      subject: "Welcome to Auth In",
+      text: `Hello ${name}, thanks for trying out Auth In, your account has been created successfully!`,
     };
 
     try {
@@ -116,7 +116,7 @@ export const sendVerificationCode = asyncHandler(async (req, res) => {
   await user.save();
 
   const mailOptions = {
-    from: `"AuthIn" <${process.env.SMTP_BREVO_EMAIL}>`,
+    from: `"Auth In" <${process.env.SMTP_BREVO_EMAIL}>`,
     to: email,
     subject: "Reset Password",
     text: `Hello ${user.name}, your verification code is ${otp}. Use it to reset your password.`,

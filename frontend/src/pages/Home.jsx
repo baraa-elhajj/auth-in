@@ -26,7 +26,7 @@ const Home = () => {
       <p className="text-lg w-md text-center">
         {isLoggedIn
           ? "You have successfully logged in to Auth In"
-          : "Auth In is a simple and cool fully functional Login component. Get started below!"}
+          : "Auth In is a simple and cool fully functional authentication system. Get started below!"}
       </p>
 
       {!isLoggedIn && (
