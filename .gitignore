@@ -1,2 +1,14 @@
-/node_modules
-.env
+# Root-level node modules
+node_modules/
+package-lock.json
+
+# Backend
+/backend/node_modules
+/backend/.env
+
+# Frontend
+/frontend/node_modules
+/frontend/.env
+
+# OS / Editor files
+.vscode/
