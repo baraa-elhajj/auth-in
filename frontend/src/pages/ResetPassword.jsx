@@ -1,8 +1,9 @@
+import PageLoader from "@/components/PageLoader";
 import Spinner from "@/components/Spinner";
 import VerificationCode from "@/components/VerificationCode";
 import { AppContent } from "@/contexts/AppContext";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -15,9 +16,15 @@ const ForgotPassword = () => {
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const { apiUrl } = useContext(AppContent);
+  const { apiUrl, isLoggedIn, authLoading } = useContext(AppContent);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,6 +64,10 @@ const ForgotPassword = () => {
   const togglePassword = () => {
     setPasswordVisible(!passwordVisible);
   };
+
+  if (authLoading) {
+    return <PageLoader />;
+  }
 
   if (verifyCode) {
     return (
