@@ -28,7 +28,7 @@ export const register = asyncHandler(async (req, res) => {
 
   if (newUser) {
     const mailOptions = {
-      from: `"BDev" <${process.env.SMTP_BREVO_EMAIL}>`,
+      from: `"AuthIn" <${process.env.SMTP_BREVO_EMAIL}>`,
       to: email,
       subject: "Welcome to AuthIn",
       text: `Hello ${name}, thanks for trying out AuthIn, your account has been created successfully!`,
