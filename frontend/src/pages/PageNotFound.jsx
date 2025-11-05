@@ -9,7 +9,7 @@ const PageNotFound = () => {
       <img className="w-40 h-40" src={notFound} />
       <h1 className="mt-5 text-xl font-semibold">Page Not Found</h1>
       <p className="text-lg w-md text-center">
-        The page you have requested is not available.
+        The page you have requested is not available
       </p>
       <button
         onClick={() => navigate("/")}

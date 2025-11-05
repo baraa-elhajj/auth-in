@@ -48,7 +48,6 @@ const Login = () => {
         await axios
           .post(apiUrl + "/auth/login", { email, password })
           .then((response) => {
-            console.log(response);
             setIsLoggedIn(true);
             setUserData(response.data.user);
             navigate("/");
