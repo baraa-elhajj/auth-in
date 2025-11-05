@@ -64,6 +64,7 @@ const Login = () => {
           .then((response) => {
             setLoginForm(true);
             setEmail(response.data.user.email);
+            setPassword("");
             toast.success(
               response.data.message ??
                 "Account created successfully! Please login with your email."
