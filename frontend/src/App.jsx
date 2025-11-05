@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import ForgotPassword from "./pages/ResetPassword";
 import Home from "./pages/Home";
 import RootLayout from "./layout/RootLayout";
+import PageNotFound from "./pages/PageNotFound";
 
 export default function App() {
   const router = createBrowserRouter(
@@ -19,6 +20,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/reset-password" element={<ForgotPassword />} />
+        <Route path="*" element={<PageNotFound />} />
       </Route>
     )
   );
