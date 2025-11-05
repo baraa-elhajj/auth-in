@@ -24,11 +24,16 @@ It features JWT-based authentication system, protected routes, welcome + reset p
 git clone https://github.com/baraa-elhajj/auth-in.git
 ```
 
-2. Open two different terminals for both `backend` and `frontend` projects and install dependencies
+2. Open two different terminals for each of the `backend` and `frontend` projects and install dependencies:
 
 ```bash
-cd backend && npm install
-cd frontend && npm install
+npm install
+```
+
+or install both projects' dependencies in a single `root` terminal:
+
+```bash
+npm run install:all
 ```
 
 3. Set up environment variables<br>
@@ -61,6 +66,13 @@ npm run server
 
 ```bash
 # Frontend
+npm run dev
+```
+
+or run both concurrently in the `root` terminal:
+
+```bash
+# root
 npm run dev
 ```
 
