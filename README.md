@@ -3,7 +3,7 @@
 _A **cool** full-stack authentication system built with **MERN** stack._
 
 **Auth In** is a production-ready authentication boilerplate designed to simplify secure user management.  
-It features JWT-based authentication system, protected routes, welcome + reset password emails, and a clean UI powered by React + Tailwind CSS.
+It features JWT-based authentication system, protected routes, welcome + reset password emails, and a clean UI.
 
 ---
 
@@ -77,6 +77,10 @@ npm run dev
 ```
 
 ---
+
+## Preview
+
+<img src="./frontend/public/screenshots/auth-in.gif" alt="Alt text">
 
 ## Contribution
 
