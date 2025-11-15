@@ -82,7 +82,7 @@ const ForgotPassword = () => {
   return (
     <div
       className="mx-auto flex flex-col justify-center space-y-6 w-xs sm:w-sm p-4
-     bg-white text-black/80 rounded-xl border border-gray-200 shadow-sm"
+     bg-white text-[#1e3f66] rounded-xl border border-gray-200 shadow-sm"
     >
       <div className="flex flex-col space-y-2 text-center">
         <h1 className="text-2xl font-semibold">Reset Password</h1>
@@ -130,11 +130,11 @@ const ForgotPassword = () => {
             <button
               disabled={loading}
               className={`items-center justify-center rounded-md text-sm font-semibold 
-              transition-colors duration-300 text-white/90 bg-violet-600/80 
+              transition-colors duration-300 text-white bg-[#e8b44a]
               h-10 px-4 py-2 w-full ${
                 loading
                   ? "cursor-not-allowed opacity-70"
-                  : "cursor-pointer hover:bg-violet-600/70"
+                  : "cursor-pointer hover:bg-[#1e3f66]"
               }`}
             >
               {loading ? (

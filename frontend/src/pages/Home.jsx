@@ -1,4 +1,4 @@
-import developer from "@/assets/images/developer.png";
+import developer from "@/assets/images/developer_1.jpg";
 import PageLoader from "@/components/PageLoader";
 import { AppContent } from "@/contexts/AppContext";
 import { useContext } from "react";
@@ -13,14 +13,25 @@ const Home = () => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      <img className="w-40 h-40" src={developer} />
+    <div className="flex flex-col items-center gap-2 text-[#1e3f66]">
+      <img className="w-auto h-50" src={developer} />
       <h1 className="mt-5 text-xl font-semibold">
-        Hello, {isLoggedIn ? userData?.name : "Developer"}!
+        Hello,{" "}
+        {isLoggedIn ? (
+          <span className="text-[#e8b44a]">{userData?.name}!</span>
+        ) : (
+          "Developer!"
+        )}
       </h1>
 
       <h1 className="text-3xl">
-        {isLoggedIn ? "Congratulations" : "Welcome to Auth In"}
+        {isLoggedIn ? (
+          "Congratulations"
+        ) : (
+          <span>
+            Welcome to <span className="text-[#e4af0e]">Auth In</span>
+          </span>
+        )}
       </h1>
 
       <p className="text-lg w-md text-center">
@@ -32,8 +43,8 @@ const Home = () => {
       {!isLoggedIn && (
         <button
           onClick={() => navigate("/login")}
-          className="mt-3 cursor-pointer py-2 px-5 rounded-3xl border border-black text-white bg-black 
-        hover:bg-violet-600/80 hover:border-transparent hover:text-white transition-colors duration-200"
+          className="mt-3 cursor-pointer py-2 px-5 rounded-3xl border border-black text-white bg-[#1e3f66]
+        hover:bg-[#e4af0e] hover:border-transparent hover:text-white transition-colors duration-200"
         >
           Get Started
         </button>
