@@ -45,8 +45,8 @@ const Navbar = () => {
         <button
           disabled={loading}
           onClick={handleLogout}
-          className={`cursor-pointer py-2 px-4 mr-10 rounded-lg border border-[#1e3f66]
-        text-[#1e3f66] hover:bg-[#e8b44a] hover:border-transparent hover:text-white transition-colors duration-200 ${
+          className={`cursor-pointer py-2 px-4 mr-10 rounded-lg border border-(--primary)
+        text-(--primary) hover:bg-(--secondary) hover:border-transparent hover:text-white transition-colors duration-200 ${
           loading ? "cursor-not-allowed opacity-80" : "cursor-pointer"
         }`}
         >
