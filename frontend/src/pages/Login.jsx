@@ -87,7 +87,7 @@ const Login = () => {
   return (
     <div
       className="mx-auto flex flex-col justify-center space-y-6 w-xs sm:w-sm p-4
-     bg-white text-[#1e3f66] rounded-xl border border-gray-200 shadow-sm"
+     bg-white text-(--primary) rounded-xl border border-gray-200 shadow-sm"
     >
       <div className="flex flex-col space-y-2 text-center">
         <h1 className="text-2xl font-semibold">
@@ -171,7 +171,7 @@ const Login = () => {
                 {loginForm && (
                   <div
                     className="cursor-pointer text-xs underline underline-offset-3 font-semibold 
-                    text-[#e8b44a] hover:text-[#e8b44a]/80 mt-1"
+                    text-(--secondary) hover:text-(--secondary)/80 mt-1"
                     onClick={() => navigate("/reset-password")}
                   >
                     Forgot your password?
@@ -182,7 +182,7 @@ const Login = () => {
             <button
               disabled={loading}
               className={`items-center justify-center rounded-md text-sm font-semibold 
-             transition-colors duration-300 text-white/90 bg-[#e4af0e] hover:bg-[#1e3f66] 
+             transition-colors duration-300 text-white/90 bg-(--secondary) hover:bg-(--primary) 
              h-10 px-4 py-2 w-full ${
                loading ? "cursor-not-allowed opacity-80" : "cursor-pointer"
              }`}
@@ -202,7 +202,7 @@ const Login = () => {
       <p className="px-8 text-center text-sm text-gray-500">
         {loginForm ? "Don't have an account? " : "Already have an account? "}
         <span
-          className="cursor-pointer text-sm underline underline-offset-3 font-semibold text-[#e4af0e] hover:text-[#e4af0e]/80"
+          className="cursor-pointer text-sm underline underline-offset-3 font-semibold text-(--secondary) hover:text-(--secondary)/80"
           onClick={toggleLoginForm}
         >
           {loginForm ? "Sign Up" : "Login"}

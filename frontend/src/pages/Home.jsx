@@ -13,12 +13,12 @@ const Home = () => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-2 text-[#1e3f66]">
+    <div className="flex flex-col items-center gap-2 text-(--primary)">
       <img className="w-auto h-50" src={developer} />
       <h1 className="mt-5 text-xl font-semibold">
         Hello,{" "}
         {isLoggedIn ? (
-          <span className="text-[#e8b44a]">{userData?.name}!</span>
+          <span className="text-(--secondary)">{userData?.name}!</span>
         ) : (
           "Developer!"
         )}
@@ -29,7 +29,7 @@ const Home = () => {
           "Congratulations"
         ) : (
           <span>
-            Welcome to <span className="text-[#e4af0e]">Auth In</span>
+            Welcome to <span className="text-(--secondary)">Auth In</span>
           </span>
         )}
       </h1>
@@ -43,8 +43,8 @@ const Home = () => {
       {!isLoggedIn && (
         <button
           onClick={() => navigate("/login")}
-          className="mt-3 cursor-pointer py-2 px-5 rounded-3xl border border-black text-white bg-[#1e3f66]
-        hover:bg-[#e4af0e] hover:border-transparent hover:text-white transition-colors duration-200"
+          className="mt-3 cursor-pointer py-2 px-5 rounded-3xl border border-black text-white bg-(--primary)
+        hover:bg-(--secondary) hover:border-transparent hover:text-white transition-colors duration-200"
         >
           Get Started
         </button>

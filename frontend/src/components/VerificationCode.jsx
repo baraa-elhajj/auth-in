@@ -93,7 +93,7 @@ const VerificationCode = ({ setVerifyCode, setResetPassword, email }) => {
       {}
       <div
         className="bg-white border border-gray-200 p-6 sm:p-8 rounded-2xl shadow-2xl shadow-black/10 
-      max-w-sm w-full text-center text-black/80 relative overflow-hidden"
+      max-w-sm w-full text-center text-(--primary) relative overflow-hidden"
       >
         <div className="relative z-10">
           <h1 className="text-2xl font-bold mb-2">Reset Password</h1>
@@ -126,7 +126,7 @@ const VerificationCode = ({ setVerifyCode, setResetPassword, email }) => {
                      rounded-lg outline-none transition-all placeholder-gray-400
                   ${
                     focusedIndex === index
-                      ? "border-2 border-violet-500/80"
+                      ? "border-2 border-(--primary)/80"
                       : "border border-dashed border-gray-300 hover:border-gray-400"
                   }`}
               />
@@ -137,11 +137,11 @@ const VerificationCode = ({ setVerifyCode, setResetPassword, email }) => {
             onClick={handleVerify}
             disabled={loading || !isCodeComplete}
             className={`items-center justify-center rounded-md text-sm font-semibold 
-             transition-colors duration-300 text-white/90 bg-violet-600/80  
+             transition-colors duration-300 text-white/90 bg-(--primary)/80  
              h-10 px-4 py-2 w-full ${
                loading || !isCodeComplete
                  ? "cursor-not-allowed opacity-70"
-                 : "cursor-pointer hover:bg-violet-600/70"
+                 : "cursor-pointer hover:bg-(--secondary)"
              }`}
           >
             {loading ? <Spinner color="white" /> : "Verify Code"}
@@ -149,7 +149,7 @@ const VerificationCode = ({ setVerifyCode, setResetPassword, email }) => {
 
           <p className="mt-4 text-gray-500 text-sm">
             Didn&apos;t receive a code?{" "}
-            <button className="text-violet-600/80 hover:text-violet-500/80 font-semibold underline">
+            <button className="cursor-pointer text-(--secondary) hover:text-(--secondary)/80 font-semibold underline">
               Resend code
             </button>
           </p>
