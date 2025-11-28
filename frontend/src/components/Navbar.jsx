@@ -1,4 +1,4 @@
-import logo from "@/assets/images/authin_logo_1.jpg";
+import logo from "@/assets/images/authin_logo.png";
 import { AppContent } from "@/contexts/AppContext";
 import axios from "axios";
 import { useContext, useState } from "react";
@@ -38,7 +38,7 @@ const Navbar = () => {
     <div className="h-25 flex justify-between items-center bg-gray-50 mb-20">
       <img
         onClick={() => navigate("/")}
-        className="cursor-pointer w-auto h-13 ml-10"
+        className="cursor-pointer w-auto h-60 ml-10"
         src={logo}
       />
       {isLoggedIn && (
