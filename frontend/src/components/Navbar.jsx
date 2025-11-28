@@ -35,7 +35,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="h-25 flex justify-between items-center bg-gray-50 mb-20">
+    <div className="h-25 flex justify-between items-center bg-gray-50 mb-10">
       <img
         onClick={() => navigate("/")}
         className="cursor-pointer w-auto h-13 ml-10"
