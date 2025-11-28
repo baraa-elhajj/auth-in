@@ -171,7 +171,7 @@ const Login = () => {
                 </div>
                 {loginForm && (
                   <div
-                    className="cursor-pointer text-xs underline underline-offset-3 font-semibold 
+                    className="cursor-pointer max-w-fit text-xs underline underline-offset-3 font-semibold 
                     text-(--secondary) hover:text-(--secondary)/80 mt-1"
                     onClick={() => navigate("/reset-password")}
                   >

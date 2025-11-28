@@ -15,7 +15,7 @@ const GoogleLogin = () => {
     <button
       onClick={login}
       className="h-10 px-4 py-2 w-full flex items-center justify-center rounded-md text-sm font-semibold 
-      border border-(--primary) hover:cursor-pointer text-(--primary)/85 hover:bg-(--primary)/80 \
+      border border-(--primary) hover:cursor-pointer text-(--primary)/85 hover:bg-(--primary)/80 hover:border-(--primary)/80
       hover:text-white transition-colors"
     >
       <svg className="mr-2 h-4 w-4" viewBox="0 0 48 48">
