@@ -4,6 +4,7 @@ import "dotenv/config";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/mongoDB.js";
 import authRouter from "./routes/authRoutes.js";
+import googleAuthRouter from "./routes/googleAuthRoutes.js";
 import errorHandler from "./middlewares/errorHandler.js";
 
 const app = express();
@@ -17,8 +18,11 @@ const fontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
 const allowedOrigins = [fontendUrl];
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 
+// TODO: Fix Cross-Origin-Opener-Policy warning
+
 app.get("/", (req, res) => res.send("API is working"));
 app.use("/api/auth", authRouter);
+app.use("/api/google", googleAuthRouter);
 
 app.use(errorHandler);
 

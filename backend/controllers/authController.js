@@ -64,7 +64,11 @@ export const login = asyncHandler(async (req, res) => {
   }
 
   const user = await userModel.findOne({ email });
-  if (!user || !(await bcrypt.compare(password, user.password))) {
+  if (
+    !user ||
+    user.googleId ||
+    !(await bcrypt.compare(password, user.password))
+  ) {
     res.status(constants.UNAUTHORIZED);
     throw new Error("Invalid email or password");
   }
@@ -105,7 +109,7 @@ export const sendVerificationCode = asyncHandler(async (req, res) => {
   }
 
   const user = await userModel.findOne({ email });
-  if (!user) {
+  if (!user || user.googleId) {
     res.status(constants.NOT_FOUND);
     throw new Error("Invalid email");
   }

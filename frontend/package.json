@@ -10,6 +10,7 @@
     "start": "vite preview"
   },
   "dependencies": {
+    "@react-oauth/google": "^0.12.2",
     "@tailwindcss/vite": "^4.1.16",
     "axios": "^1.12.2",
     "react": "^19.1.1",

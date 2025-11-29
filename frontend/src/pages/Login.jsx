@@ -1,3 +1,4 @@
+import GoogleLogin from "@/components/GoogleLogin";
 import PageLoader from "@/components/PageLoader";
 import Spinner from "@/components/Spinner";
 import { AppContent } from "@/contexts/AppContext";
@@ -86,7 +87,7 @@ const Login = () => {
 
   return (
     <div
-      className="mx-auto flex flex-col justify-center space-y-6 w-xs sm:w-sm p-4
+      className="mx-auto mt-10 flex flex-col justify-center space-y-6 w-xs sm:w-sm p-4
      bg-white text-(--primary) rounded-xl border border-gray-200 shadow-sm"
     >
       <div className="flex flex-col space-y-2 text-center">
@@ -170,7 +171,7 @@ const Login = () => {
                 </div>
                 {loginForm && (
                   <div
-                    className="cursor-pointer text-xs underline underline-offset-3 font-semibold 
+                    className="cursor-pointer max-w-fit text-xs underline underline-offset-3 font-semibold 
                     text-(--secondary) hover:text-(--secondary)/80 mt-1"
                     onClick={() => navigate("/reset-password")}
                   >
@@ -195,6 +196,17 @@ const Login = () => {
                 "Sign Up"
               )}
             </button>
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="w-[90%] border-t border-(--primary)" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-white px-1 text-(--primary)">
+                  Or Continue with
+                </span>
+              </div>
+            </div>
+            <GoogleLogin />
           </div>
         </form>
       </div>
