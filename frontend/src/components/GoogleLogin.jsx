@@ -1,12 +1,30 @@
+import { AppContent } from "@/contexts/AppContext";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const GoogleLogin = () => {
+  const navigate = useNavigate();
+  const { apiUrl, setIsLoggedIn, setUserData } = useContext(AppContent);
+
   const login = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      await axios.post("/api/auth/google", {
-        token: tokenResponse.access_token,
-      });
+    flow: "auth-code",
+    onSuccess: async (codeResponse) => {
+      await axios
+        .post(apiUrl + "/google/auth", {
+          code: codeResponse.code,
+        })
+        .then((response) => {
+          setIsLoggedIn(true);
+          setUserData(response.data.user);
+          navigate("/");
+          toast.success(response.data.message ?? "Logged in successfully");
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
     },
     onError: () => console.log("Google login failed"),
   });
