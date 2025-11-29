@@ -56,7 +56,7 @@ export const googleAuth = asyncHandler(async (req, res) => {
     };
 
     try {
-      // await transporter.sendMail(mailOptions);
+      await transporter.sendMail(mailOptions);
     } catch (error) {
       // @ts-ignore
       console.error("Could not send welcome email: ", error.message);
