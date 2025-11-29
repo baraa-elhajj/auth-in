@@ -3,7 +3,7 @@
 _A **cool** full-stack authentication system built with **MERN** stack._
 
 **Auth In** is a production-ready authentication boilerplate designed to simplify secure user management.  
-It features JWT-based authentication system, protected routes, welcome + reset password emails, and a clean UI.
+It features JWT-based authentication system + google authentication, protected routes, welcome + reset password emails, and a clean UI.
 
 ---
 
@@ -50,11 +50,15 @@ NODE_ENV = "development"
 SMTP_BREVO_USER = your_brevo_user
 SMTP_BREVO_SECRET = your_brevo_secret
 SMTP_BREVO_EMAIL = your_brevo_email
+
+GOOGLE_CLIENT_ID = your_google_client_id
+GOOGLE_CLIENT_SECRET = your_google_client_secret
 ```
 
 ```bash
 # Frontend
 VITE_API_URL = "http://localhost:4000/api"
+VITE_GOOGLE_CLIENT_ID = your_google_client_id
 ```
 
 4. Run
