@@ -196,19 +196,21 @@ const Login = () => {
                 "Sign Up"
               )}
             </button>
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="w-[90%] border-t border-(--primary)" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white px-1 text-(--primary)">
-                  Or Continue with
-                </span>
-              </div>
-            </div>
-            <GoogleLogin />
           </div>
         </form>
+        <div className="relative -mt-2">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="w-[90%] border-t border-(--primary)" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-white px-1 text-(--primary)">
+              Or Continue with
+            </span>
+          </div>
+        </div>
+        <div className="-mt-2">
+          <GoogleLogin />
+        </div>
       </div>
 
       <p className="px-8 text-center text-sm text-gray-500">
