@@ -1,17 +1,19 @@
 import { AppContent } from "@/contexts/AppContext";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const GoogleLogin = () => {
   const navigate = useNavigate();
   const { apiUrl, setIsLoggedIn, setUserData } = useContext(AppContent);
+  const [loading, setLoading] = useState(false);
 
   const login = useGoogleLogin({
     flow: "auth-code",
     onSuccess: async (codeResponse) => {
+      setLoading(true);
       await axios
         .post(apiUrl + "/google/auth", {
           code: codeResponse.code,
@@ -24,10 +26,19 @@ const GoogleLogin = () => {
         })
         .catch((error) => {
           toast.error(error.response.data.message);
-        });
+        })
+        .finally(() => setLoading(false));
     },
     onError: () => console.log("Google login failed"),
   });
+
+  if (loading) {
+    return (
+      <div className="w-8 h-8 relative mx-auto">
+        <div className="absolute inset-0 rounded-full border-4 border-(--primary) border-t-transparent animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <button
