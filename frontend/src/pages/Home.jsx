@@ -13,7 +13,7 @@ const Home = () => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-2 text-(--primary)">
+    <div className="flex flex-col items-center gap-2 text-(--primary) mt-20 md:mt-0">
       <img className="w-[70%] md:max-w-xs mx-auto" src={developer} />
       <h1 className="mt-5 text-xl md:text-2xl font-semibold">
         Hello,{" "}
