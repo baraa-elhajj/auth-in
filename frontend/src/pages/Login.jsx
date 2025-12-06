@@ -87,34 +87,34 @@ const Login = () => {
 
   return (
     <div
-      className="mx-auto mt-10 flex flex-col justify-center space-y-6 w-xs sm:w-sm p-4
+      className="mx-auto mt-5 md:mt-10 flex flex-col justify-center space-y-6 w-2xs md:w-sm p-4
      bg-white text-(--primary) rounded-xl border border-gray-200 shadow-sm"
     >
       <div className="flex flex-col space-y-2 text-center">
-        <h1 className="text-2xl font-semibold">
+        <h1 className="text-lg md:text-2xl font-semibold">
           {loginForm ? "Welcome back" : "Create an account"}
         </h1>
-        <p className="text-sm text-gray-500">
+        <p className="text-xs md:text-sm text-gray-500">
           {loginForm
             ? "Enter your email below to sign in to your account"
             : "Enter your info below to create an new account"}
         </p>
       </div>
 
-      <div className="grid gap-6">
+      <div className="grid gap-4 md:gap-6">
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4">
             {!loginForm && (
               <div className="grid gap-2">
                 <label
-                  className="text-sm font-medium leading-none"
+                  className="text-xs md:text-sm font-medium leading-none"
                   htmlFor="name"
                 >
                   Full Name
                 </label>
                 <input
-                  className="flex h-10 w-full rounded-md border border-gray-200 bg-background px-3 py-2 text-sm  
-                placeholder:text-gray-500 shadow-xs disabled:cursor-not-allowed disabled:opacity-50"
+                  className="flex h-7 md:h-10 md:w-full rounded-md border border-gray-200 bg-background px-3 py-2 text-sm  
+                placeholder:text-gray-500 placeholder:text-xs md:placeholder:text-sm shadow-xs disabled:cursor-not-allowed disabled:opacity-50"
                   id="name"
                   onChange={(e) => setName(e.target.value)}
                   value={name}
@@ -126,7 +126,7 @@ const Login = () => {
             )}
             <div className="grid gap-2">
               <label
-                className="text-sm font-medium leading-none"
+                className="text-xs md:text-sm font-medium leading-none"
                 htmlFor="email"
               >
                 Email
@@ -134,8 +134,9 @@ const Login = () => {
               <input
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
-                className="flex h-10 w-full rounded-md border border-gray-200 bg-background px-3 py-2 text-sm  
-                placeholder:text-gray-500 shadow-xs disabled:cursor-not-allowed disabled:opacity-50"
+                className="w-full rounded-md border border-gray-200 bg-background px-3 py-1 md:py-2
+                  text-sm placeholder:text-gray-500 placeholder:text-xs md:placeholder:text-sm shadow-xs 
+                  disabled:cursor-not-allowed disabled:opacity-50"
                 id="email"
                 placeholder="name@example.com"
                 required
@@ -145,7 +146,7 @@ const Login = () => {
             <div className="grid gap-2">
               <div className="flex items-center">
                 <label
-                  className="text-sm font-medium leading-none"
+                  className="text-xs md:text-sm font-medium leading-none"
                   htmlFor="password"
                 >
                   Password
@@ -155,15 +156,16 @@ const Login = () => {
                 <input
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
-                  className="flex h-10 w-full rounded-md border border-gray-200 bg-background px-3 py-2 
-                  text-sm placeholder:text-gray-500 shadow-xs disabled:cursor-not-allowed disabled:opacity-50"
+                  className="w-full rounded-md border border-gray-200 bg-background px-3 py-1 md:py-2
+                  text-sm placeholder:text-gray-500 placeholder:text-xs md:placeholder:text-sm shadow-xs 
+                  disabled:cursor-not-allowed disabled:opacity-50"
                   id="password"
                   required
                   type={passwordVisible ? "text" : "password"}
                 />
                 <div
                   className={`cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3 ${
-                    loginForm && "mb-3"
+                    loginForm && "mb-4"
                   }`}
                   onClick={togglePassword}
                 >
@@ -171,7 +173,7 @@ const Login = () => {
                 </div>
                 {loginForm && (
                   <div
-                    className="cursor-pointer max-w-fit text-xs underline underline-offset-3 font-semibold 
+                    className="cursor-pointer max-w-fit text-[0.7rem] md:text-xs underline underline-offset-3 font-semibold 
                     text-(--secondary) hover:text-(--secondary)/80 mt-1"
                     onClick={() => navigate("/reset-password")}
                   >
@@ -202,7 +204,7 @@ const Login = () => {
           <div className="absolute inset-0 flex items-center justify-center">
             <span className="w-[90%] border-t border-(--primary)" />
           </div>
-          <div className="relative flex justify-center text-xs uppercase">
+          <div className="relative flex justify-center text-[0.7rem] md:text-xs uppercase">
             <span className="bg-white px-1 text-(--primary)">
               Or Continue with
             </span>
@@ -213,10 +215,10 @@ const Login = () => {
         </div>
       </div>
 
-      <p className="px-8 text-center text-sm text-gray-500">
+      <p className="px-auto text-center text-xs md:text-sm text-gray-500">
         {loginForm ? "Don't have an account? " : "Already have an account? "}
         <span
-          className="cursor-pointer text-sm underline underline-offset-3 font-semibold text-(--secondary) hover:text-(--secondary)/80"
+          className="cursor-pointer text-xs md:text-sm underline underline-offset-3 font-semibold text-(--secondary) hover:text-(--secondary)/80"
           onClick={toggleLoginForm}
         >
           {loginForm ? "Sign Up" : "Login"}
