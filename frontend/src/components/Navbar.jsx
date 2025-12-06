@@ -1,4 +1,4 @@
-import logo from "@/assets/images/authin_logo.png";
+import logo from "@/assets/images/authin_logo_sm.png";
 import { AppContent } from "@/contexts/AppContext";
 import axios from "axios";
 import { useContext, useState } from "react";
@@ -35,17 +35,17 @@ const Navbar = () => {
   };
 
   return (
-    <div className="h-25 flex justify-between items-center bg-gray-50 mb-10">
+    <div className="h-[10%] md:h-[15%] flex justify-between items-center bg-gray-50 mb-0 md:mb-10">
       <img
         onClick={() => navigate("/")}
-        className="cursor-pointer w-auto h-60 ml-10"
+        className="cursor-pointer h-[50%] ml-5 md:ml-10"
         src={logo}
       />
       {isLoggedIn && (
         <button
           disabled={loading}
           onClick={handleLogout}
-          className={`cursor-pointer py-2 px-4 mr-10 rounded-lg border border-(--primary)
+          className={`text-sm md:text-lg cursor-pointer py-1 px-2 md:py-2 md:px-4 mr-5 md:mr-10 rounded-lg border border-(--primary)
         text-(--primary) hover:bg-(--secondary) hover:border-transparent hover:text-white transition-colors duration-200 ${
           loading ? "cursor-not-allowed opacity-80" : "cursor-pointer"
         }`}
