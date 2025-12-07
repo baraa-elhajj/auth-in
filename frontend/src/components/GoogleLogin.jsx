@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 const GoogleLogin = ({ loading, setLoading }) => {
   const navigate = useNavigate();
   const { apiUrl, setIsLoggedIn, setUserData } = useContext(AppContent);
-  const [loading, setLoading] = useState(false);
 
   const login = useGoogleLogin({
     flow: "auth-code",
