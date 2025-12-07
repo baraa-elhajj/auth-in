@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const [googleAuthLoading, setGoogleAuthLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const [loginForm, setLoginForm] = useState(true);
@@ -113,9 +114,11 @@ const Login = () => {
                   Full Name
                 </label>
                 <input
-                  className="flex h-7 md:h-10 md:w-full rounded-md border border-gray-200 bg-background px-3 py-2 text-sm  
-                placeholder:text-gray-500 placeholder:text-xs md:placeholder:text-sm shadow-xs disabled:cursor-not-allowed disabled:opacity-50"
+                  className="flex h-7 md:h-10 md:w-full rounded-md border border-gray-200 bg-background 
+                  px-3 py-2 text-sm placeholder:text-gray-500 placeholder:text-xs md:placeholder:text-sm 
+                  shadow-xs disabled:cursor-not-allowed disabled:opacity-50"
                   id="name"
+                  disabled={googleAuthLoading}
                   onChange={(e) => setName(e.target.value)}
                   value={name}
                   placeholder="your name"
@@ -137,6 +140,7 @@ const Login = () => {
                 className="w-full rounded-md border border-gray-200 bg-background px-3 py-1 md:py-2
                   text-sm placeholder:text-gray-500 placeholder:text-xs md:placeholder:text-sm shadow-xs 
                   disabled:cursor-not-allowed disabled:opacity-50"
+                disabled={googleAuthLoading}
                 id="email"
                 placeholder="name@example.com"
                 required
@@ -159,6 +163,7 @@ const Login = () => {
                   className="w-full rounded-md border border-gray-200 bg-background px-3 py-1 md:py-2
                   text-sm placeholder:text-gray-500 placeholder:text-xs md:placeholder:text-sm shadow-xs 
                   disabled:cursor-not-allowed disabled:opacity-50"
+                  disabled={googleAuthLoading}
                   id="password"
                   required
                   type={passwordVisible ? "text" : "password"}
@@ -173,8 +178,8 @@ const Login = () => {
                 </div>
                 {loginForm && (
                   <div
-                    className="cursor-pointer max-w-fit text-[0.7rem] md:text-xs underline underline-offset-3 font-semibold 
-                    text-(--secondary) hover:text-(--secondary)/80 mt-1"
+                    className="cursor-pointer max-w-fit text-[0.7rem] md:text-xs underline underline-offset-3 
+                    font-semibold text-(--secondary) hover:text-(--secondary)/80 mt-1"
                     onClick={() => navigate("/reset-password")}
                   >
                     Forgot your password?
@@ -183,11 +188,13 @@ const Login = () => {
               </div>
             </div>
             <button
-              disabled={loading}
+              disabled={loading || googleAuthLoading}
               className={`items-center justify-center rounded-md text-sm font-semibold 
              transition-colors duration-300 text-white/90 bg-(--secondary) hover:bg-(--primary) 
              h-10 px-4 py-2 w-full ${
-               loading ? "cursor-not-allowed opacity-80" : "cursor-pointer"
+               loading || googleAuthLoading
+                 ? "cursor-not-allowed opacity-80"
+                 : "cursor-pointer"
              }`}
             >
               {loading ? (
@@ -211,7 +218,10 @@ const Login = () => {
           </div>
         </div>
         <div className="-mt-2">
-          <GoogleLogin />
+          <GoogleLogin
+            loading={googleAuthLoading}
+            setLoading={setGoogleAuthLoading}
+          />
         </div>
       </div>
 
