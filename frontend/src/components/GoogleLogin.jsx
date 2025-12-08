@@ -1,11 +1,11 @@
 import { AppContent } from "@/contexts/AppContext";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const GoogleLogin = () => {
+const GoogleLogin = ({ loading, setLoading }) => {
   const navigate = useNavigate();
   const { apiUrl, setIsLoggedIn, setUserData } = useContext(AppContent);
   const [loading, setLoading] = useState(false);
