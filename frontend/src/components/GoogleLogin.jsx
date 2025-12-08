@@ -24,7 +24,8 @@ const GoogleLogin = ({ loading, setLoading }) => {
           toast.success(response.data.message ?? "Logged in successfully");
         })
         .catch((error) => {
-          toast.error(error.response.data.message);
+          toast.error("Something went wrong! Please try again later.");
+          console.error("Google Auth failed: ", error.response.data.message);
         })
         .finally(() => setLoading(false));
     },
