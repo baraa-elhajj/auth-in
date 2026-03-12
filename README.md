@@ -1,7 +1,5 @@
 # Auth In
 
-_A **cool** full-stack authentication system built with **MERN** stack._
-
 **Auth In** is a production-ready authentication boilerplate designed to simplify secure user management.  
 It features JWT-based authentication system + Google OAuth authentication, protected routes, welcome + reset password emails, and a responsive, clean UI.
 
